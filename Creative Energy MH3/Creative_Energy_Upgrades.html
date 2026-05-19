@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creative Energy MH3 — Precon Upgrades</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0d0d0d;
+      color: #e8e0d0;
+      font-family: 'Georgia', serif;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, #000d1a 0%, #001a2d 50%, #000d1a 100%);
+      border-bottom: 2px solid #1a5080;
+      padding: 32px 40px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      color: #2980b9;
+      text-shadow: 0 0 20px #2980b980;
+      letter-spacing: 2px;
+    }
+
+    header p {
+      color: #999;
+      margin-top: 8px;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+
+    .nav-back {
+      display: inline-block;
+      margin: 16px 40px;
+      color: #2980b9;
+      text-decoration: none;
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+    .nav-back:hover { opacity: 1; text-decoration: underline; }
+
+    .legend {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      padding: 16px;
+      background: #111;
+      border-bottom: 1px solid #333;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: #aaa;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot-t1 { background: #2980b9; }
+    .dot-t2 { background: #e67e22; }
+    .dot-t3 { background: #7f8c8d; }
+
+    section {
+      padding: 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      color: #2980b9;
+      border-bottom: 1px solid #1a5080;
+      padding-bottom: 10px;
+      margin-bottom: 28px;
+      letter-spacing: 1px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 24px;
+    }
+
+    .card-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card-img-container {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+
+    .card-img-container:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 12px 40px #2980b966;
+    }
+
+    .card-img-container img {
+      width: 100%;
+      display: block;
+      border-radius: 12px;
+    }
+
+    .tier-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .tier-1 .tier-badge { background: #2980b9; color: #fff; }
+    .tier-2 .tier-badge { background: #e67e22; color: #fff; }
+    .tier-3 .tier-badge { background: #555; color: #ccc; }
+
+    .price-badge {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: rgba(0,0,0,0.8);
+      color: #f0c040;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+
+    .card-info {
+      padding: 0 4px;
+    }
+
+    .card-name {
+      font-size: 0.85rem;
+      font-weight: bold;
+      color: #e8e0d0;
+      line-height: 1.3;
+    }
+
+    .card-swap {
+      font-size: 0.72rem;
+      color: #888;
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    .card-swap span {
+      color: #2980b9;
+    }
+
+    .card-reason {
+      font-size: 0.72rem;
+      color: #aaa;
+      margin-top: 4px;
+      line-height: 1.4;
+      font-style: italic;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #2a2a2a;
+      margin: 40px 0 0;
+    }
+
+    .swap-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin-top: 8px;
+    }
+
+    .swap-table th {
+      text-align: left;
+      padding: 10px 14px;
+      background: #111;
+      color: #2980b9;
+      border-bottom: 1px solid #1a5080;
+    }
+
+    .swap-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #1e1e1e;
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    .swap-table tr:hover td { background: #161616; }
+
+    .out { color: #e74c3c; }
+    .in  { color: #2ecc71; }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: #555;
+      font-size: 0.8rem;
+      border-top: 1px solid #1e1e1e;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>⚔ Creative Energy MH3 — Precon Upgrades</h1>
+  <p>Satya, Aetherflux Genius &nbsp;·&nbsp; Jeskai Energy/Artefakt &nbsp;·&nbsp; Stand: 19. Mai 2026</p>
+</header>
+
+<a class="nav-back" href="../index.html">← Zurück zur Übersicht</a>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot dot-t1"></div> Tier 1 — Hohe Synergie, sofortiger Impact</div>
+  <div class="legend-item"><div class="legend-dot dot-t2"></div> Tier 2 — Solide Verstärkung</div>
+  <div class="legend-item"><div class="legend-dot dot-t3"></div> Tier 3 — Situativ / Thematisch</div>
+</div>
+
+<section>
+
+  <h2>Tier 1 — Aus deiner Sammlung · Hohe Synergie</h2>
+  <div class="card-grid">
+    <div class="card-wrap">
+      <div class="card-img-container tier-1">
+        <a href="https://www.cardmarket.com/en/Magic/Products/Search?searchString=Emeritus%20of%20Ideation" target="_blank" rel="noopener">
+          <img src="https://cards.scryfall.io/normal/front/7/5/75961d36-acf6-425f-9698-0bf52af74f31.jpg" alt="Emeritus of Ideation // Ancestral Recall" loading="lazy">
+        </a>
+        <span class="tier-badge">Tier 1</span>
+        <span class="price-badge">13,71 €</span>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Emeritus of Ideation // Ancestral Recall</div>
+        <div class="card-swap">Ersetzt: <span>Wall of Runes</span></div>
+        <div class="card-reason">Mythic-Kreatur mit Ancestral Recall auf Flip-Seite. Massive Card-Advantage-Engine in einem Deck das viel braut und zieht.</div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-img-container tier-1">
+        <a href="https://www.cardmarket.com/en/Magic/Products/Search?searchString=Counterspell" target="_blank" rel="noopener">
+          <img src="https://cards.scryfall.io/normal/front/e/1/e1e48b21-1a4f-4708-a4b4-e2e296df924c.jpg" alt="Counterspell" loading="lazy">
+        </a>
+        <span class="tier-badge">Tier 1</span>
+        <span class="price-badge">2,66 €</span>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Counterspell</div>
+        <div class="card-swap">Ersetzt: <span>Miscast</span></div>
+        <div class="card-reason">Harter Counterspell für 2 Mana ohne Einschränkungen. Schützt Combo-Pläne und wichtige Artefakte.</div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-img-container tier-1">
+        <a href="https://www.cardmarket.com/en/Magic/Products/Search?searchString=Gogo,%20Master%20of%20Mimicry" target="_blank" rel="noopener">
+          <img src="https://cards.scryfall.io/normal/front/0/5/054e180d-4e66-426d-adb5-a4fee94b6a67.jpg" alt="Gogo, Master of Mimicry" loading="lazy">
+        </a>
+        <span class="tier-badge">Tier 1</span>
+        <span class="price-badge">6,84 €</span>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Gogo, Master of Mimicry</div>
+        <div class="card-swap">Ersetzt: <span>Professional Face-Breaker</span></div>
+        <div class="card-reason">Mythic: Kopiert Fähigkeiten anderer Kreaturen — in einem Deck voller Satya-Kopien eine explosive Value-Engine.</div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-img-container tier-1">
+        <a href="https://www.cardmarket.com/en/Magic/Products/Search?searchString=Flow%20State" target="_blank" rel="noopener">
+          <img src="https://cards.scryfall.io/normal/front/4/7/47d6093b-b1b6-4956-8bfd-02cce899f832.jpg" alt="Flow State" loading="lazy">
+        </a>
+        <span class="tier-badge">Tier 1</span>
+        <span class="price-badge">4,86 €</span>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Flow State</div>
+        <div class="card-swap">Ersetzt: <span>Roaming Ghostlight</span></div>
+        <div class="card-reason">Rare: Ermöglicht mehrere Spells pro Zug durch reduzierten Mana-Cost. Perfekt in einem Deck mit vielen kleinen Artefakt-Spells.</div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-img-container tier-1">
+        <a href="https://www.cardmarket.com/en/Magic/Products/Search?searchString=Miscast" target="_blank" rel="noopener">
+          <img src="https://cards.scryfall.io/normal/front/0/3/033afbd5-9937-4957-98ba-48e469a490bb.jpg" alt="Miscast" loading="lazy">
+        </a>
+        <span class="tier-badge">Tier 1</span>
+        <span class="price-badge">1,53 €</span>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Miscast</div>
+        <div class="card-swap">Ersetzt: <span>Capture Sphere</span></div>
+        <div class="card-reason">1-Mana-Counter für Instants und Sorceries. Günstigstes Interaction-Piece — schützt vor Removal und Wraths.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h2 style="margin-top:40px">Tier 2 — Solide Verstärkung</h2>
+  <div class="card-grid">
+    <div class="card-wrap">
+      <div class="card-img-container tier-2">
+        <a href="https://www.cardmarket.com/en/Magic/Products/Search?searchString=Loran%20of%20the%20Third%20Path" target="_blank" rel="noopener">
+          <img src="https://cards.scryfall.io/normal/front/4/5/450ec0a6-839b-4a35-a79b-ae358408a17c.jpg" alt="Loran of the Third Path" loading="lazy">
+        </a>
+        <span class="tier-badge">Tier 2</span>
+        <span class="price-badge">3,77 €</span>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Loran of the Third Path</div>
+        <div class="card-swap">Ersetzt: <span>Stone Docent</span></div>
+        <div class="card-reason">Zieht Karten wenn Equipment/Artefakte angelegt werden. Generiert konstante Card-Advantage in einem Artefakt-Deck.</div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-img-container tier-2">
+        <a href="https://www.cardmarket.com/en/Magic/Products/Search?searchString=Stormwing%20Entity" target="_blank" rel="noopener">
+          <img src="https://cards.scryfall.io/normal/front/0/5/0540ee72-6370-4f70-9526-6f441b3cac1e.jpg" alt="Stormwing Entity" loading="lazy">
+        </a>
+        <span class="tier-badge">Tier 2</span>
+        <span class="price-badge">0,37 €</span>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Stormwing Entity</div>
+        <div class="card-swap">Ersetzt: <span>Jeskai Elder</span></div>
+        <div class="card-reason">3/3 Flyer der günstig wird wenn du einen Instant/Sorcery gespielt hast. Gut als Beatstick und Scry-Effekt.</div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-img-container tier-2">
+        <a href="https://www.cardmarket.com/en/Magic/Products/Search?searchString=Flashback" target="_blank" rel="noopener">
+          <img src="https://cards.scryfall.io/normal/front/1/b/1b832fda-d7c4-4566-884c-2a8b6da15488.jpg" alt="Flashback" loading="lazy">
+        </a>
+        <span class="tier-badge">Tier 2</span>
+        <span class="price-badge">4,65 €</span>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Flashback</div>
+        <div class="card-swap">Ersetzt: <span>Unexpected Request</span></div>
+        <div class="card-reason">Kopiert einen Instant oder Sorcery für 2 Mana — verdoppelt Brainstorm, Cultivate oder jeden starken Spell.</div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-img-container tier-2">
+        <a href="https://www.cardmarket.com/en/Magic/Products/Search?searchString=Ghostly%20Pilferer" target="_blank" rel="noopener">
+          <img src="https://cards.scryfall.io/normal/front/2/f/2f6a3605-950d-488b-8e4f-e2c339ef48dc.jpg" alt="Ghostly Pilferer" loading="lazy">
+        </a>
+        <span class="tier-badge">Tier 2</span>
+        <span class="price-badge">1,51 €</span>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Ghostly Pilferer</div>
+        <div class="card-swap">Ersetzt: <span>Tester of the Tangential</span></div>
+        <div class="card-reason">Nicht blockierbarer Dieb der Karten zieht wenn er Schaden macht. Gibt dem Deck evasive Card-Draw.</div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-img-container tier-2">
+        <a href="https://www.cardmarket.com/en/Magic/Products/Search?searchString=Rewind" target="_blank" rel="noopener">
+          <img src="https://cards.scryfall.io/normal/front/b/8/b832abcc-9ffd-47bf-827a-01b303c610ee.jpg" alt="Rewind" loading="lazy">
+        </a>
+        <span class="tier-badge">Tier 2</span>
+        <span class="price-badge">0,41 €</span>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Rewind</div>
+        <div class="card-swap">Ersetzt: <span>Brainsurge</span></div>
+        <div class="card-reason">4-Mana-Counterspell der sich selbst durch Untap der Länder bezahlt. Hält Mana offen für Gegenzüge.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h2 style="margin-top:40px">Tier 3 — Situativ / Thematisch</h2>
+  <div class="card-grid">
+    <div class="card-wrap">
+      <div class="card-img-container tier-3">
+        <a href="https://www.cardmarket.com/en/Magic/Products/Search?searchString=Sabin,%20Master%20Monk" target="_blank" rel="noopener">
+          <img src="https://cards.scryfall.io/normal/front/4/3/43bacd07-fdaf-4ce4-bf7a-dda55a99d460.jpg" alt="Sabin, Master Monk" loading="lazy">
+        </a>
+        <span class="tier-badge">Tier 3</span>
+        <span class="price-badge">1,06 €</span>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Sabin, Master Monk</div>
+        <div class="card-swap">Ersetzt: <span>Purifying Dragon</span></div>
+        <div class="card-reason">Solider FF-Creature mit guten Stats. Thematisch passend in einem Final Fantasy-nahen Deck.</div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-img-container tier-3">
+        <a href="https://www.cardmarket.com/en/Magic/Products/Search?searchString=Frantic%20Inventory" target="_blank" rel="noopener">
+          <img src="https://cards.scryfall.io/normal/front/8/f/8f14abb0-0e9f-448e-85d7-6cb71f756c56.jpg" alt="Frantic Inventory" loading="lazy">
+        </a>
+        <span class="tier-badge">Tier 3</span>
+        <span class="price-badge">0,20 €</span>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Frantic Inventory</div>
+        <div class="card-swap">Ersetzt: <span>Rousing Read</span></div>
+        <div class="card-reason">Billiger Card Draw der mit jeder Kopie stärker wird. 2+ Kopien im Deck ziehen 2-3 Karten für 2 Mana.</div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-img-container tier-3">
+        <a href="https://www.cardmarket.com/en/Magic/Products/Search?searchString=Vanquish%20the%20Horde" target="_blank" rel="noopener">
+          <img src="https://cards.scryfall.io/normal/front/5/b/5bb0f6ec-6448-40bd-a819-b828b85b2118.jpg" alt="Vanquish the Horde" loading="lazy">
+        </a>
+        <span class="tier-badge">Tier 3</span>
+        <span class="price-badge">0,60 €</span>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Vanquish the Horde</div>
+        <div class="card-swap">Ersetzt: <span>Ultimate Magic: Holy</span></div>
+        <div class="card-reason">Günstiger Boardwipe für 2+ Mana. Resettet das Board wenn nötig.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h2 style="margin-top:40px">Konkrete Swap-Paare</h2>
+  <table class="swap-table">
+    <thead>
+      <tr>
+        <th>Raus (aus Precon)</th>
+        <th>Rein (aus Binder)</th>
+        <th>Begründung</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="out">Wall of Runes</td>
+        <td class="in">Emeritus of Ideation // Ancestral Recall</td>
+        <td>Mythic-Kreatur mit Ancestral Recall auf Flip-Seite. Massive Card-Advantage-Engine in einem Deck das viel braut und zieht.</td>
+      </tr>
+      <tr>
+        <td class="out">Miscast</td>
+        <td class="in">Counterspell</td>
+        <td>Harter Counterspell für 2 Mana ohne Einschränkungen. Schützt Combo-Pläne und wichtige Artefakte.</td>
+      </tr>
+      <tr>
+        <td class="out">Professional Face-Breaker</td>
+        <td class="in">Gogo, Master of Mimicry</td>
+        <td>Mythic: Kopiert Fähigkeiten anderer Kreaturen — in einem Deck voller Satya-Kopien eine explosive Value-Engine.</td>
+      </tr>
+      <tr>
+        <td class="out">Roaming Ghostlight</td>
+        <td class="in">Flow State</td>
+        <td>Rare: Ermöglicht mehrere Spells pro Zug durch reduzierten Mana-Cost. Perfekt in einem Deck mit vielen kleinen Artefakt-Spells.</td>
+      </tr>
+      <tr>
+        <td class="out">Capture Sphere</td>
+        <td class="in">Miscast</td>
+        <td>1-Mana-Counter für Instants und Sorceries. Günstigstes Interaction-Piece — schützt vor Removal und Wraths.</td>
+      </tr>
+      <tr>
+        <td class="out">Stone Docent</td>
+        <td class="in">Loran of the Third Path</td>
+        <td>Zieht Karten wenn Equipment/Artefakte angelegt werden. Generiert konstante Card-Advantage in einem Artefakt-Deck.</td>
+      </tr>
+      <tr>
+        <td class="out">Jeskai Elder</td>
+        <td class="in">Stormwing Entity</td>
+        <td>3/3 Flyer der günstig wird wenn du einen Instant/Sorcery gespielt hast. Gut als Beatstick und Scry-Effekt.</td>
+      </tr>
+      <tr>
+        <td class="out">Unexpected Request</td>
+        <td class="in">Flashback</td>
+        <td>Kopiert einen Instant oder Sorcery für 2 Mana — verdoppelt Brainstorm, Cultivate oder jeden starken Spell.</td>
+      </tr>
+      <tr>
+        <td class="out">Tester of the Tangential</td>
+        <td class="in">Ghostly Pilferer</td>
+        <td>Nicht blockierbarer Dieb der Karten zieht wenn er Schaden macht. Gibt dem Deck evasive Card-Draw.</td>
+      </tr>
+      <tr>
+        <td class="out">Brainsurge</td>
+        <td class="in">Rewind</td>
+        <td>4-Mana-Counterspell der sich selbst durch Untap der Länder bezahlt. Hält Mana offen für Gegenzüge.</td>
+      </tr>
+      <tr>
+        <td class="out">Purifying Dragon</td>
+        <td class="in">Sabin, Master Monk</td>
+        <td>Solider FF-Creature mit guten Stats. Thematisch passend in einem Final Fantasy-nahen Deck.</td>
+      </tr>
+      <tr>
+        <td class="out">Rousing Read</td>
+        <td class="in">Frantic Inventory</td>
+        <td>Billiger Card Draw der mit jeder Kopie stärker wird. 2+ Kopien im Deck ziehen 2-3 Karten für 2 Mana.</td>
+      </tr>
+      <tr>
+        <td class="out">Ultimate Magic: Holy</td>
+        <td class="in">Vanquish the Horde</td>
+        <td>Günstiger Boardwipe für 2+ Mana. Resettet das Board wenn nötig.</td>
+      </tr>
+    </tbody>
+  </table>
+
+</section>
+
+<footer>Erstellt durch Claude Code &nbsp;·&nbsp; Analyse basierend auf ManaBox-Sammlung + EDHREC (2026-05-19)</footer>
+
+</body>
+</html>
